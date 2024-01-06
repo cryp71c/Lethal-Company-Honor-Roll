@@ -13,9 +13,27 @@ namespace HonorRoll.Patches
         [HarmonyPatch("Update")]
         [HarmonyPostfix]
         static void honorRoll() {
-            int totalScrapCollectedInQuota;
-            totalScrapCollectedInQuota = RoundManager.Instance.scrapCollectedInLevel;
+            int totalScrapCollectedInQuota = RoundManager.Instance.scrapCollectedInLevel;
+            float totalScrapAccrossAllRounds = RoundManager.Instance.totalScrapValueInLevel;
 
         }
     }
 }
+
+
+/*  
+
+    NOTES:
+        The RoundManager object has the scrap collected in level and total scap in level
+        
+        RoundManager :
+            RoundManager.Instance.scrapCollectedInLevel
+            RoundManager.Instance.totalScrapValueInLevel;
+            
+            Good place to store previous round data?
+
+        FillEndGameStats :: Where grade is calculated
+        
+        StartOfRound ::
+            Maybe Useful information? Havent looked yet.
+ */
