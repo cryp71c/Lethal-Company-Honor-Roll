@@ -22,13 +22,18 @@ namespace HonorRoll.Patches
 
             
 
-            if (TimeOfDay.Instance.daysUntilDeadline == 4) {
+            if (TimeOfDay.Instance.daysUntilDeadline == 4) { // QuotaSettings.
                 totalScrapCollectedInQuota = 0f;
                 totalScrapAccrossAllRounds = RoundManager.Instance.totalScrapValueInLevel;
             }
 
             if ((totalScrapCollectedInQuota/totalScrapAccrossAllRounds) >= 0.6f) {
                 honorRollCounter++;
+            }
+
+            if (honorRollCounter == 3) {
+                // Do some thing (increase buy rates, reduce quota by 5-15%, or add an additional
+                // day)
             }
 
             //TimeOfDay.Instance.daysUntilDeadline;
