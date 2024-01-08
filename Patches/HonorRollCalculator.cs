@@ -1,4 +1,6 @@
 ﻿using HarmonyLib;
+using BepInEx;
+using UnityEngine;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -13,8 +15,25 @@ namespace HonorRoll.Patches
         [HarmonyPatch("Update")]
         [HarmonyPostfix]
         static void honorRoll() {
-            int totalScrapCollectedInQuota = RoundManager.Instance.scrapCollectedInLevel;
-            float totalScrapAccrossAllRounds = RoundManager.Instance.totalScrapValueInLevel;
+            
+            float totalScrapCollectedInQuota;
+            float totalScrapAccrossAllRounds;
+            int honorRollCounter;
+
+            
+
+            if (TimeOfDay.Instance.daysUntilDeadline == 4) {
+                totalScrapCollectedInQuota = 0f;
+                totalScrapAccrossAllRounds = RoundManager.Instance.totalScrapValueInLevel;
+            }
+
+            if ((totalScrapCollectedInQuota/totalScrapAccrossAllRounds) >= 0.6f) {
+                honorRollCounter++;
+            }
+
+            //TimeOfDay.Instance.daysUntilDeadline;
+            //int totalScrapCollectedInQuota = RoundManager.Instance.scrapCollectedInLevel;
+            //float totalScrapAccrossAllRounds = RoundManager.Instance.totalScrapValueInLevel;
 
         }
     }
@@ -36,4 +55,7 @@ namespace HonorRoll.Patches
         
         StartOfRound ::
             Maybe Useful information? Havent looked yet.
+
+        TimeOfDay ::
+            TimeOfDay.SetBuyingRateForDay
  */
